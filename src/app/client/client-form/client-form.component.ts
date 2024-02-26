@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Client} from '../client';
 import { CustomersService } from 'src/app/customers.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -14,11 +15,15 @@ export class ClientFormComponent {
   nome:String
   success:boolean = false
   errors:String[];
-  
+  id:number;
 
-  constructor(private service:CustomersService){
-    this.client = new Client();
+  constructor(
+    private service:CustomersService,
+    private router:Router,
+    private activatedRoute: ActivatedRoute){ 
+      this.client = new Client();
   }
+
 
   onSubmit(){
     this.service
@@ -33,4 +38,7 @@ export class ClientFormComponent {
     })
   }
 
+  backList(){
+    this.router.navigate(['./client-list']);
+  }
 }

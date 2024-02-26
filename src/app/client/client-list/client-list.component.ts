@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { Client } from '../client';
+import { CustomersService } from 'src/app/customers.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-list',
@@ -7,4 +10,20 @@ import { Component } from '@angular/core';
 })
 export class ClientListComponent {
 
+  clients:Client[] = [];
+
+  constructor(private service: CustomersService,
+    private router: Router ){ }
+
+  ngOnInit():void{
+    this.service
+    .getListClient()
+    .subscribe(response =>
+      this.clients = response );
+  }
+
+  newRegister(){
+    this.router.navigate(['./client-forms']);
+  }
+ 
 }

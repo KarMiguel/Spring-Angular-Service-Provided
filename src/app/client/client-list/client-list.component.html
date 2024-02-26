@@ -1,1 +1,43 @@
-<p>client-list works!</p>
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Consulta</li>
+</ol>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <button class="btn btn-warning" (click)="newRegister()">
+                <i class="fa fa-plus"></i>
+                Novo
+            </button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome:</th>
+                        <th>CPF:</th>
+                        <th>Data Cadastro:</th>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let client of clients">
+                    <td>{{client.id}}</td>
+                    <td>{{client.name}}</td>
+                    <td>{{client.cpf}}</td>
+                    <td>{{client.dateRegister}}</td>
+                    <td>
+                        <button  class="btn btn-primary">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
