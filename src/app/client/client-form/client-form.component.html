@@ -1,0 +1,68 @@
+<h1 class="mt-4">Formulário Cliente</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+<div class="container">
+
+    
+    <form #clientForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="alert alert-success"
+                         role="alert" 
+                         *ngIf="this.success == true">
+                        Cliente salvo/atualizado com Sucesso!
+                    </div>
+
+                    <div class="alert alert-danger"
+                         role="alert" 
+                         *ngFor=" let erro of errors">
+                            {{erro}}
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6" *ngIf="client.id">
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" class="form-control" disabled [ngModel]="client.id" name="id">      
+                </div>
+            </div>
+
+            <div class="col-md-6" *ngIf="client.dateRegister">
+                <div class="form-group">
+                    <label for="dateRegister">Data Cadastro:</label>
+                    <input type="text" id="dateRegister" class="form-control" name="dateRegister" disabled [ngModel]="client.dateRegister">      
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nome: *</label>
+                    <input type="text" id="name" required class="form-control" name="name" [(ngModel)]="client.name">      
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="cpf">CPF: *</label>
+                    <input type="text" id="cpf" required class="form-control" name="cpf" [(ngModel)]="client.cpf">      
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-success" >
+                        <i class="fa fa-save"></i>
+                        Salvar
+                    </button>
+                    <button type="reset" class="ml-3 btn btn-danger" >
+                        <i class="fa fa-trash"></i>
+                        Limpar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
