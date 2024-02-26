@@ -20,7 +20,7 @@
                         <th>Nome:</th>
                         <th>CPF:</th>
                         <th>Data Cadastro:</th>
-                        <th> </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tr *ngFor="let client of clients">
@@ -29,8 +29,11 @@
                     <td>{{client.cpf}}</td>
                     <td>{{client.dateRegister}}</td>
                     <td>
-                        <button  class="btn btn-primary">
-                            <i class="fa fa-edit"></i>
+                        <button  class="btn btn-primary" routerLink="../client-forms/{{client.id}}">
+                            <i class="fa fa-edit text-white"></i>
+                        </button>
+                        <button  class="ml-2 btn btn-danger" routerLink="../client-forms/{{client.id}}">
+                            <i class="fa fa-trash text-white"></i>
                         </button>
                     </td>
                 </tr>

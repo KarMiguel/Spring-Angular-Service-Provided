@@ -24,7 +24,6 @@ export class ClientFormComponent {
       this.client = new Client();
   }
 
-
   onSubmit(){
     this.service
     .save(this.client)
@@ -36,6 +35,32 @@ export class ClientFormComponent {
       this.success = false;
       this.errors = errorResponse.error.errors
     })
+  }
+  
+ngOnInit(): void {
+
+  if (this.id) {
+    this.service
+    .atualizar(this.client)
+    .subscribe(response =>{ 
+      this.success = true
+      this.errors = []
+    },errorResponse =>{
+      this.errors = ['Erro ao Atualizar o Cliente.'];
+    })
+  } else {
+      this.activatedRoute.params.subscribe(params => {
+        if (params && params['id']) {
+          this.id = params['id']; 
+          this.service
+          .getClientById(this.id)
+          .subscribe(
+            response => this.client = response,
+            error => this.client = new Client()
+          );
+        }
+      });
+    }
   }
 
   backList(){
