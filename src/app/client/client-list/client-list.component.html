@@ -3,6 +3,19 @@
     <li class="breadcrumb-item active">Consulta</li>
 </ol>
 <div class="container">
+    <div class="col-md-12">
+        <div class="alert alert-success"
+             role="alert" 
+             *ngIf="messageSuccess">
+                {{messageSuccess}}   
+            </div>
+
+        <div class="alert alert-danger"
+             role="alert" 
+             *ngIf="messageError">
+                {{messageError}}
+            </div>
+    </div>
     <div class="row">
         <div class="col-md-2">
             <button class="btn btn-warning" (click)="newRegister()">
@@ -23,24 +36,44 @@
                         <th></th>
                     </tr>
                 </thead>
-                <tr *ngFor="let client of clients">
-                    <td>{{client.id}}</td>
-                    <td>{{client.name}}</td>
-                    <td>{{client.cpf}}</td>
-                    <td>{{client.dateRegister}}</td>
-                    <td>
-                        <button  class="btn btn-primary" routerLink="../client-forms/{{client.id}}">
-                            <i class="fa fa-edit text-white"></i>
-                        </button>
-                        <button  class="ml-2 btn btn-danger" routerLink="../client-forms/{{client.id}}">
-                            <i class="fa fa-trash text-white"></i>
-                        </button>
-                    </td>
-                </tr>
+                
                 <tbody>
-
+                    <tr *ngFor="let client of clients">
+                        <td>{{client.id}}</td>
+                        <td>{{client.name}}</td>
+                        <td>{{client.cpf}}</td>
+                        <td>{{client.dateRegister}}</td>
+                        <td>
+                            <button  class="btn btn-primary" routerLink="../client-forms/{{client.id}}">
+                                <i class="fa fa-edit text-white"></i>
+                            </button>
+                            <button class="ml-2 btn btn-danger" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalDelet"
+                                    (click)="preparesDeletion(client)">
+                                <i class="fa fa-trash text-white"></i>
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
+        <div id="modalDelet" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="clientSelection">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>Confirmação</h4>
+                    </div>
+                    <div class="modal-body">
+                        Realmente deseja o Cliente {{clientSelection.name}}?
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" (click)="deleteClient()" data-bs-dismiss="modal">Confirmar</button>
+                        <button class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+   
 </div>

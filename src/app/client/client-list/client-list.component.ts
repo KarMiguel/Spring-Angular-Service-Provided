@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class ClientListComponent {
 
   clients:Client[] = [];
+  clientSelection: Client;
+  messageSuccess: String;
+  messageError:string;
 
   constructor(private service: CustomersService,
     private router: Router ){ }
@@ -28,4 +31,16 @@ export class ClientListComponent {
   backList(){
     this.router.navigate(['./client-list']);
   }
+  preparesDeletion(client:Client){
+    this.clientSelection = client
+  }
+  deleteClient(){
+    this.service.deletById(this.clientSelection)
+    .subscribe(response => {this.messageSuccess='Cliete Deletado com Sucesso!',
+      this.ngOnInit();
+    },
+    erro => this.messageError = 'Ocorreu erro ao deletar o Client.!'
+    )
+  }
+
 }
