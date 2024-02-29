@@ -3,6 +3,7 @@ package io.github.KarMiguel.customers.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.context.annotation.Bean;
 

@@ -22,6 +22,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/service-provided")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:4200")
 public class ServiceProvidedController {
 
     @Autowired
