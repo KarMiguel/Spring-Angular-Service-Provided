@@ -22,7 +22,6 @@ export class CustomersService {
   getListClient(): Observable<Client[]>{
     return this.http.get<Client[]>('http://localhost:8090/api/client');
   }
-
   
   getClientById(id:number): Observable<Client>{
     return this.http.get<any>(` http://localhost:8090/api/client/${id}`);

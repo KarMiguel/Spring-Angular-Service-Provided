@@ -8,23 +8,26 @@ import {TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component'
 import { ClientModule } from './client/client.module';
 import { CustomersService } from './customers.service';
-import { HttpClientModule} from '@angular/common/http'
-
+import { HttpClientModule} from '@angular/common/http';
+import { ServiceProvidedModule } from './service-provided/service-provided.module';
+import { ServicePrestadoService } from './service-prestado.service';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
-    ClientModule
+    ClientModule,
+    ServiceProvidedModule
   ],
   providers: [
-    CustomersService
+    CustomersService,
+    ServicePrestadoService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {  }

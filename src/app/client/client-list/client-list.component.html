@@ -29,21 +29,21 @@
             <table class="table table-condensed">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Nome:</th>
-                        <th>CPF:</th>
-                        <th>Data Cadastro:</th>
-                        <th></th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Nome:</th>
+                        <th class="text-center">CPF:</th>
+                        <th class="text-center">Data Cadastro:</th>
+                        <th class="text-center">Ações</th>
                     </tr>
                 </thead>
                 
                 <tbody>
                     <tr *ngFor="let client of clients">
-                        <td>{{client.id}}</td>
-                        <td>{{client.name}}</td>
-                        <td>{{client.cpf}}</td>
-                        <td>{{client.dateRegister}}</td>
-                        <td>
+                        <td class="text-center">{{client.id}}</td>
+                        <td class="text-center">{{client.name}}</td>
+                        <td class="text-center">{{client.cpf}}</td>
+                        <td class="text-center">{{client.dateRegister}}</td>
+                        <td class="text-center">
                             <button  class="btn btn-primary" routerLink="../client-forms/{{client.id}}">
                                 <i class="fa fa-edit text-white"></i>
                             </button>
@@ -56,6 +56,7 @@
                         </td>
                     </tr>
                 </tbody>
+                
             </table>
         </div>
         <div id="modalDelet" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="clientSelection">
