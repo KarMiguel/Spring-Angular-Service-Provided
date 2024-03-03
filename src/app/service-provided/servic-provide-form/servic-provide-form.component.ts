@@ -15,7 +15,6 @@ export class ServicProvideFormComponent implements OnInit{
   success:boolean = false;
   errors:String[]=[];
   
-  
 
   constructor(private clientService: CustomersService,
     private serviceProvided:ServicePrestadoService){

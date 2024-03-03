@@ -25,9 +25,6 @@ export class ClientListComponent {
       this.clients = response );
   }
 
-  newRegister(){
-    this.router.navigate(['./client-forms']);
-  }
   backList(){
     this.router.navigate(['./client-list']);
   }

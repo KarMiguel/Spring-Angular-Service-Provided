@@ -63,7 +63,5 @@ ngOnInit(): void {
     }
   }
 
-  backList(){
-    this.router.navigate(['./client-list']);
-  }
+
 }

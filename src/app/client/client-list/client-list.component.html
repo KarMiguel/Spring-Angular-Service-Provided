@@ -18,15 +18,16 @@
     </div>
     <div class="row">
         <div class="col-md-2">
-            <button class="btn btn-warning" (click)="newRegister()">
+            <button class="btn btn-warning" 
+            routerLink="/client-forms">
                 <i class="fa fa-plus"></i>
                 Novo
             </button>
         </div>
     </div>
-    <div class="row mt-4">
+    <div class="row mt-3">
         <div class="col-md-12">
-            <table class="table table-condensed">
+            <table class="table  overflow table-condensed">
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
@@ -43,16 +44,18 @@
                         <td class="text-center">{{client.name}}</td>
                         <td class="text-center">{{client.cpf}}</td>
                         <td class="text-center">{{client.dateRegister}}</td>
-                        <td class="text-center">
-                            <button  class="btn btn-primary" routerLink="../client-forms/{{client.id}}">
+                        <td class="text-center row col-sm-12">
+                           <div class="col-md-12 ">
+                            <button  class="btn btn-primary  mr-1" routerLink="../client-forms/{{client.id}}">
                                 <i class="fa fa-edit text-white"></i>
                             </button>
-                            <button class="ml-2 btn btn-danger" 
+                            <button class=" btn btn-danger " 
                                     data-bs-toggle="modal"
                                     data-bs-target="#modalDelet"
                                     (click)="preparesDeletion(client)">
                                 <i class="fa fa-trash text-white"></i>
                             </button>
+                           </div>
                         </td>
                     </tr>
                 </tbody>
