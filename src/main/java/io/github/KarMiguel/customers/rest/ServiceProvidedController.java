@@ -22,7 +22,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("api/service-provided")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:4200")
 public class ServiceProvidedController {
 
     @Autowired
@@ -55,6 +54,11 @@ public class ServiceProvidedController {
         return new ResponseEntity<>(serviceProvided, HttpStatus.CREATED);
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<List<ServiceProvided>> list() {
+        List<ServiceProvided> service = serviceProvidedReposity.findAll();
+        return ResponseEntity.ok(service);
+    }
     @GetMapping
     private ResponseEntity<List<ServiceProvided>> search(
             @RequestParam(required = false,defaultValue = "") String name,
@@ -63,4 +67,5 @@ public class ServiceProvidedController {
         return ResponseEntity.ok(serviceProvidedReposity
                 .findByNameAndMes(name.trim().toUpperCase(),month));
     }
+
 }

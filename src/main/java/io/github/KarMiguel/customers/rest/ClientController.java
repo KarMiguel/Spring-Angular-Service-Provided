@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/client")
-@CrossOrigin("http://localhost:4200")
 public class ClientController {
 
     private final ClientRepository repository;
@@ -58,7 +57,6 @@ public class ClientController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
 
     }
-
 
     @GetMapping
     public ResponseEntity<List<Client>> listAll() {
