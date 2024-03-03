@@ -25,9 +25,7 @@ export class ClientListComponent {
       this.clients = response );
   }
 
-  backList(){
-    this.router.navigate(['./client-list']);
-  }
+  
   preparesDeletion(client:Client){
     this.clientSelection = client
   }
