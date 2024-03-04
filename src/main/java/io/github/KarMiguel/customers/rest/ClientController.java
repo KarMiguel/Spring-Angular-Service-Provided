@@ -12,7 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/client")
+@RequestMapping("api/client/")
 public class ClientController {
 
     private final ClientRepository repository;
