@@ -1,4 +1,4 @@
-package io.github.KarMiguel.customers.rest;
+package io.github.KarMiguel.customers.rest.controller;
 
 import io.github.KarMiguel.customers.model.entity.Client;
 import io.github.KarMiguel.customers.model.entity.ServiceProvided;
