@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from './user';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +12,29 @@ export class LoginComponent {
 
   username:string;
   password:string;
-  loginError:boolean;
+  name:string;
   signing_up: boolean
+  menssageSuccess:string | null;
+  errors: string[];
 
-
-  constructor(private router:Router){}
+  constructor(private router:Router,
+    private authService:AuthService){}
 
   onSubmit(){
-    this.router.navigate(['/home'])
+    const user:User = new User();
+    user.username = this.username;
+    user.password = this.password;
+      this.authService
+        .login(user)
+        .subscribe(
+          (response) =>{
+            const access_token = response.token;
+            localStorage.setItem('token', access_token);
+            console.log("Token" ,access_token);
+          this.router.navigate(['/home'])
+        },errorResponse =>{
+          this.errors = ['Usuário e/ou senha incorreto']
+        })
   }
   prepareRegister(event:any){
     event.preventDefault();
@@ -27,5 +44,27 @@ export class LoginComponent {
     this.signing_up = false
   }
 
+  register(){
+    const user:User = new User();
+    user.name = this.name;
+    user.username = this.username;
+    user.password = this.password;
+      this.authService
+        .registerUser(user)
+        .subscribe(response =>{
+          this.menssageSuccess = "Cadastro realizado com Sucesso! Efetue Login!";
+          this.signing_up= false;
+          this.username='';
+          this.password='';
+          this.name ='';
+          this.errors= []
+        }, errorResponse =>{
+          this.menssageSuccess = null;
+          this.errors = errorResponse.error.errors;
+        });
+        
+  }
 
-}
+  }
+
+

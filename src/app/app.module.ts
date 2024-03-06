@@ -8,12 +8,15 @@ import {TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component'
 import { ClientModule } from './client/client.module';
 import { CustomersService } from './customers.service';
-import { HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { ServiceProvidedModule } from './service-provided/service-provided.module';
 import { ServicePrestadoService } from './service-prestado.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { LayoutComponent } from './layout/layout.component';
+import { AuthService } from './auth.service';
+import { CommonModule } from '@angular/common';
+import { TokenInterceptor } from './token.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,11 +31,18 @@ import { LayoutComponent } from './layout/layout.component';
     TemplateModule,
     ClientModule,
     ServiceProvidedModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [
     CustomersService,
-    ServicePrestadoService
+    ServicePrestadoService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

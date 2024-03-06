@@ -24,7 +24,7 @@ export class ServicProvideListComponent implements OnInit {
     if(this.month == null && this.name == null){
       this.message = "Selecione um nome/mês.";
     }
-    else if(this.month ==0){
+    else if(this.month == 0){
       this.message = "Selecione um mês.";
       this.list=[];
     }else if(this.month > 0){ 

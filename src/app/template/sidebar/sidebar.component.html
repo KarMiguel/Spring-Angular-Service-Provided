@@ -18,10 +18,17 @@
                    <div class="sb-nav-link-icon"><i class="fa-solid fa-coins"></i></div>
                    Serviços Prestados
                </a>
+                <div class="sb-sidenav-menu-heading">Logout</div>
+               <a class="nav-link collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseLayouts"
+               aria-expanded="false" aria-controls="collapseLayouts" (click)="logout()" href="#" > 
+                  <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+                  Sair
+              </a>
             </div>
         </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            Start Bootstrap
+        <div class="sb-sidenav-footer ">
+            <div class=" pb-4 pt-2 small">Usuário Logado:</div>
+            {{userLogado}} 
         </div>
+
     </nav>

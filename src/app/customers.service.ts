@@ -14,7 +14,8 @@ export class CustomersService {
   apiUrl : string = environment.apiUrl
 
   save(client:Client): Observable<Client>{
-    return this.http.post<Client>(`${this.apiUrl}/api/client`,client);
+
+    return this.http.post<Client>(`${this.apiUrl}/api/client/`,client);
   }
 
   atualizar(client:Client): Observable<any>{
@@ -22,7 +23,8 @@ export class CustomersService {
   }
 
   getListClient(): Observable<Client[]>{
-    return this.http.get<Client[]>(`${this.apiUrl}/api/client`);
+    
+    return this.http.get<Client[]>(`${this.apiUrl}/api/client/`);
   }
   
   getClientById(id:number): Observable<Client>{
@@ -35,3 +37,7 @@ export class CustomersService {
 
 
 }
+function throwError(arg0: string): Observable<Client[]> {
+  throw new Error('Function not implemented.');
+}
+
