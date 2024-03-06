@@ -23,17 +23,18 @@ export class AuthService {
     localStorage.removeItem('token')
   }
 
-  getUserAuthentication(){
+  getUserAuthentication(): string | null {
     const token = this.obterToken();
-    if(token){
-      const  user = this.jwtHelper.decodeToken(token).user_name
-      return user;
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      return decodedToken.username;
     }
+    return null;
+     
   }
   obterToken(){
-    const tokenString = localStorage.getItem('token');
-    if(tokenString){
-      const token = JSON.stringify(tokenString)
+    const token = localStorage.getItem('token');
+    if(token){
       return token;
     }
     return false; 

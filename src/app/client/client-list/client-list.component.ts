@@ -24,8 +24,16 @@ export class ClientListComponent {
     .subscribe(response =>
       this.clients = response );
   }
-
   
+  formatarCPF(cpf: string): string {
+    // Remove caracteres não numéricos
+    cpf = cpf.replace(/\D/g, '');
+  
+    // Aplica a formatação
+    cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+  
+    return cpf;
+  }
   preparesDeletion(client:Client){
     this.clientSelection = client
   }

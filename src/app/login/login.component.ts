@@ -20,6 +20,8 @@ export class LoginComponent {
   constructor(private router:Router,
     private authService:AuthService){}
 
+   
+
   onSubmit(){
     const user:User = new User();
     user.username = this.username;
@@ -30,7 +32,6 @@ export class LoginComponent {
           (response) =>{
             const access_token = response.token;
             localStorage.setItem('token', access_token);
-            console.log("Token" ,access_token);
           this.router.navigate(['/home'])
         },errorResponse =>{
           this.errors = ['Usuário e/ou senha incorreto']

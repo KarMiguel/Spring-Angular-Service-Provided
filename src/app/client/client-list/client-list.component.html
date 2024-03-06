@@ -1,9 +1,9 @@
-<h1 class="mt-4">Clientes</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Consulta</li>
-</ol>
 <div class="container">
-    <div class="col-md-12">
+    <h1 class="mt-4">Clientes</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Consulta</li>
+        </ol>
+    <div class="col-md-12 mt-5">
         <div class="alert alert-success"
              role="alert" 
              *ngIf="messageSuccess">
@@ -42,7 +42,7 @@
                     <tr *ngFor="let client of clients">
                         <td class="text-center">{{client.id}}</td>
                         <td class="text-center">{{client.name}}</td>
-                        <td class="text-center">{{client.cpf}}</td>
+                        <td class="text-center">{{ formatarCPF( client.cpf.toString()) }}</td>
                         <td class="text-center">{{client.dateRegister}}</td>
                         <td class="text-center row col-sm-12">
                            <div class="col-md-12 ">

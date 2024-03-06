@@ -1,10 +1,10 @@
-<h1 class="mt-4">Serviço Prestado</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active">Novo</li>
-</ol>
 <div class="container">
-  
-    <form #consultaForm="ngForm" (submit)="search()">
+    <h1 class="mt-4">Serviço Prestado</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Novo</li>
+        </ol>
+    
+    <form  class="mt-5" #consultaForm="ngForm" (submit)="search()">
         <div class="row">
             <div class="col-md-6">
                 <label for="name">Nome Cliente: </label>
@@ -42,7 +42,7 @@
         {{message}}   
     </div>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 ">
     <table class=" mt-2  table ">
         <thead>
             <tr>
@@ -58,7 +58,9 @@
                 <td class="text-center">{{servico.description}}</td>
                 <td class="text-center">{{servico.value}}</td>
                 <td class="text-center">{{servico.date}}</td>
+                   
             </tr>
         </tbody>
     </table>
+    
 </div>

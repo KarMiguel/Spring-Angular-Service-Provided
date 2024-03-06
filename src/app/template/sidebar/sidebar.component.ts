@@ -9,14 +9,16 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class SidebarComponent {
 
-  userLogado: string ;
+  userLogado: string | null ;
 
-  constructor(private authService: AuthService,private router:Router){
-    this.ngOnInit();
+  constructor(
+    private authService: AuthService,
+    private router:Router){
+  this.ngOnInit();
   }
 
   ngOnInit():void{
-    this.userLogado = this.authService.getUserAuthentication();
+    this.userLogado = this.authService.getUserAuthentication() ;
   }
 
   logout(){
