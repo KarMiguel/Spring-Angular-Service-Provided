@@ -2,23 +2,22 @@
 
 Este projeto Spring Boot oferece uma API para gerenciar clientes, serviços prestados aos clientes e autenticação de usuários.
 
-## Installation
+## Instalação
 
-1. Clone the repository:
+1. Clone na brach back-end do repository:
 
 ```bash
 https://github.com/KarMiguel/Spring-Angular-Service-Provided.git
 ```
 
-2. Install dependencies with Maven
+2. Instale dependências com Maven
 
-3. Install [PostgresSQL](https://www.postgresql.org/)
+3. Instale [PostgreSQL](https://www.postgresql.org/)
 
-## Usage
+## Uso
 
-1. Start the application with Maven
-2. The API will be accessible at http://localhost:8090
-
+1. Inicie o aplicativo com Maven
+2. A API estará acessível em http://localhost:8090
 
 ## Gerenciamento de Clientes
 
