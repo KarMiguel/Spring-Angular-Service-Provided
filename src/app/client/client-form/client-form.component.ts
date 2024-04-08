@@ -31,13 +31,15 @@ export class ClientFormComponent {
       this.success = true;
       this.errors = [];
       this.client = response
+
     },errorResponse =>{
       this.success = false;
       this.errors = errorResponse.error.errors
+
     })
   }
   
-ngOnInit(): void {
+updateClient(): void {
 
   if (this.id) {
     this.service

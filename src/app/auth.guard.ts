@@ -11,10 +11,17 @@ export const authGuard: CanActivateFn =  (
     const authService = inject(AuthService); 
     const router = inject(Router);     
 
-      if(authService.isAuthenticated()){
+    const storedId = sessionStorage.getItem('lockedId');
+    const routeId = route.paramMap.get('id');
+ 
+
+      if(storedId && routeId && storedId === routeId || authService.isAuthenticated()){
         return true;
       }else{
         router.navigate(['./login'])
         return false;
       }
+
   };
+
+  

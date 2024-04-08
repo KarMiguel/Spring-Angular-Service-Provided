@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment.development';
 import { User } from './login/user';
 import { Observable } from 'rxjs';
 import { JwtHelperService} from '@auth0/angular-jwt'; 
+import { Route, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AuthService {
   apiURL:String = environment.apiUrl +"/api/auth";
   jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private http:HttpClient) { 
+  constructor(private http:HttpClient, private router: Router) { 
 
   }
 
@@ -48,6 +49,21 @@ export class AuthService {
     }
     return false;
   }
+
+  getUserId(): string | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = this.jwtHelper.decodeToken(token);
+      return decodedToken.id; 
+    }
+    return null;
+  }
+  extractClientIdFromUrl(): string | null {
+    const currentUrl = this.router.routerState.snapshot.url;
+    const match = currentUrl.match(/\/(\d+)$/); // Extrair o ID do cliente da URL
+    return match ? match[1] : null; // Retorna o ID do cliente ou null se não encontrado
+  }
+  
   registerUser(user:User):Observable<any>{
     return this.http.post<any>(`${this.apiURL}/register`,user)
   }

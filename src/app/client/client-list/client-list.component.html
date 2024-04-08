@@ -42,11 +42,15 @@
                     <tr *ngFor="let client of clients">
                         <td class="text-center">{{client.id}}</td>
                         <td class="text-center">{{client.name}}</td>
-                        <td class="text-center">{{ formatarCPF( client.cpf.toString()) }}</td>
+                        <td class="text-center">{{ formatarCPF(client.cpf.toString()) }}</td>
                         <td class="text-center">{{client.dateRegister}}</td>
                         <td class="text-center row col-sm-12">
                            <div class="col-md-12 ">
-                            <button  class="btn btn-primary  mr-1" routerLink="../client-forms/{{client.id}}">
+                                <button  class="btn btn-primary  mr-1" 
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#modalUpdate"
+                                    (click)="preparesUpdate(client)"
+         >
                                 <i class="fa fa-edit text-white"></i>
                             </button>
                             <button class=" btn btn-danger " 
@@ -63,7 +67,7 @@
             </table>
         </div>
         <div id="modalDelet" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="clientSelection">
-            <div class="modal-dialog" role="document">
+          <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4>Confirmação</h4>
@@ -78,6 +82,54 @@
                 </div>
             </div>
         </div>
+
+        <div id="modalUpdate" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="clienteUpdate !== undefined">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Atualização de Cliente</h4>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-md-12">  
+                            <div *ngIf="success  === true" class="alert alert-success" role="alert">
+                                Cliente atualizado com Sucesso!
+                            </div>
+                            
+                           <div *ngIf="!success&& errors && errors.length > 0">
+                                <div class="alert alert-danger"
+                                role="alert" 
+                                *ngFor=" let erro of errors">
+                                {{erro}}
+                                </div>
+                           </div>
+                        </div>
+                            
+                        <form #updateForm="ngForm" >
+                            <div class="form-group">
+                                <label for="id">ID:</label>
+                                <input type="text" id="id" class="form-control" disabled [ngModel]="clienteUpdate.id" name="id">
+                            </div>
+                            <div class="form-group">
+                                <label for="updateName">Novo Nome:</label>
+                                <input type="text" id="updateName" class="form-control" required [(ngModel)]="clienteUpdate.name" name="updateName">
+                            </div>
+                            <div class="form-group">
+                                <label for="updateCPF">Novo CPF:</label>
+                                <input type="text" id="updateCPF" class="form-control" maxlength="11" required [(ngModel)]="clienteUpdate.cpf" name="updateCPF">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-success" (click)="updateClient()">Atualizar</button>
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+                            </div>                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
    
 </div>

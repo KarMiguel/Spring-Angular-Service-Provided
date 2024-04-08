@@ -6,10 +6,12 @@ import { LayoutComponent } from '../layout/layout.component';
 import { authGuard } from '../auth.guard';
 
 const routes: Routes = [
-  {path:'client',component: LayoutComponent,
-    canActivate:[authGuard], children:[
+  {path:'client',
+  component: LayoutComponent,
+    canActivate:[authGuard], 
+    children:[
       {path:'forms',component: ClientFormComponent,},
-      {path:'forms/:id',component: ClientFormComponent},
+      {path:'forms/:id',component: ClientFormComponent ,canActivate: [authGuard]},
       {path:'list',component: ClientListComponent},  
       {path:'', redirectTo:'/client/list', pathMatch:'full'},  
   ]}, 
