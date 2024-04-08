@@ -34,6 +34,11 @@ public class Client {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateRegister;
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private Users users;
+
+
     @PrePersist
     public  void prePersist(){
         setDateRegister(LocalDate.now());

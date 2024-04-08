@@ -25,6 +25,7 @@ public class ServiceProvided {
     @JoinColumn(name = "id_client")
     private Client client;
 
+
     @Column
     private BigDecimal value;
 

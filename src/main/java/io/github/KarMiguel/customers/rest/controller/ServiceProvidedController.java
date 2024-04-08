@@ -3,13 +3,15 @@ package io.github.KarMiguel.customers.rest.controller;
 import io.github.KarMiguel.customers.model.entity.Client;
 import io.github.KarMiguel.customers.model.entity.ServiceProvided;
 import io.github.KarMiguel.customers.model.repository.ClientRepository;
-import io.github.KarMiguel.customers.model.repository.ServiceProvidedReposity;
+import io.github.KarMiguel.customers.model.repository.ServiceProvidedRepository;
+import io.github.KarMiguel.customers.model.repository.UserRepository;
 import io.github.KarMiguel.customers.rest.dto.ServiceProvidedDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -17,7 +19,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("api/service-provided")
@@ -27,8 +28,10 @@ public class ServiceProvidedController {
     @Autowired
     private  ClientRepository clientRepository;
     @Autowired
-    private  ServiceProvidedReposity serviceProvidedReposity;
+    private ServiceProvidedRepository serviceProvidedReposity;
 
+    @Autowired
+    private UserRepository userRepository;
 
     @PostMapping
     public ResponseEntity<ServiceProvided> saveServiceProvided(@RequestBody @Valid ServiceProvidedDTO dto) {
@@ -55,17 +58,36 @@ public class ServiceProvidedController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<ServiceProvided>> list() {
-        List<ServiceProvided> service = serviceProvidedReposity.findAll();
+    public ResponseEntity<List<ServiceProvided>> list(Authentication authentication) {
+        // Obtém o nome de usuário do usuário logado
+        String username = authentication.getName();
+
+        // Busca o cliente associado ao usuário logado
+        Client client = clientRepository.findByUsersUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+
+        // Obtém os serviços prestados pelo cliente associado ao usuário logado
+        List<ServiceProvided> service = serviceProvidedReposity.findByClient(client);
+
         return ResponseEntity.ok(service);
+
     }
     @GetMapping
     private ResponseEntity<List<ServiceProvided>> search(
             @RequestParam(required = false,defaultValue = "") String name,
-            @RequestParam(required = false) Integer month
+            @RequestParam(required = false) Integer month,
+            Authentication authentication
     ){
-        return ResponseEntity.ok(serviceProvidedReposity
-                .findByNameAndMes(name.trim().toUpperCase(),month));
+
+        String username = authentication.getName();
+
+        Client client = clientRepository.findByUsersUsername(username)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
+
+        List<ServiceProvided> service = serviceProvidedReposity.findByNameAndMesAndClient(name,month, username);
+
+        return ResponseEntity.ok(service);
+
     }
 
 }

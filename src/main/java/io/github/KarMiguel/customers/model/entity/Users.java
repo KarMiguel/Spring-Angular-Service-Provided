@@ -31,6 +31,8 @@ public class Users  implements UserDetails{
 
     private String password;
 
+
+
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime created_at;
 
