@@ -19,6 +19,10 @@ export class ServicePrestadoService {
 
   }
 
+  deleteServiceProvided(service: ServiceProvidedSearch):Observable<ServiceProvided>{
+    return this.http.delete<ServiceProvided>(`${this.apiUrl}/api/service-provided/${service.id}`,);
+
+  }
   search(name: string, month: number): Observable<ServiceProvidedSearch[]> {
     const httpParams = new HttpParams()  
         .set("name", name? name : '')

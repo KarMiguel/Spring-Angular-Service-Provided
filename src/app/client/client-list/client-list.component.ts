@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { Client } from '../client';
 import { CustomersService } from 'src/app/customers.service';
 import { Router, ActivatedRoute } from '@angular/router';
+declare var $: any;
 
 
 @Component({
@@ -40,36 +41,44 @@ export class ClientListComponent {
   
     return cpf;
   }
+
+  formatarPhone(phone: string): string {
+    phone = phone.replace(/\D/g, '');
+  
+    phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2 - $3');
+  
+    return phone;
+  }
   preparesDeletion(client:Client){
     this.clientSelection = client
+    $('#modalDelet').modal('show'); 
+
   }
   preparesUpdate(client:Client){
     this.clienteUpdate = client
+    $('#modalUpdate').modal('show'); 
   }
   deleteClient(){
     this.service.deletById(this.clientSelection)
     .subscribe(response => {this.messageSuccess='Cliente Deletado com Sucesso!',
       this.ngOnInit();
     },
-    erro => this.messageError = 'Ocorreu erro ao deletar o Client.!'
+    erro => this.messageError = 'Ocorreu erro ao deletar o Cliente .'
     )
   }
 
   updateClient() {
     this.success = undefined;
 
-  // Chama a função para obter os dados da API novamente
-  this.service.getListClient().subscribe(response => {
-    this.clients = response;
 
-    // Em seguida, executa a lógica para atualizar o cliente
     if (this.clienteUpdate) {
       this.service.atualizar(this.clienteUpdate).subscribe(
         response => { 
           this.success = true;
           console.log("modal1 = ", this.success);
-          response = this.clienteUpdate = response.data;
-          
+          this.clienteUpdate = response.data;
+          this.service.getListClient()
+
         }, 
         errorResponse => {
           this.success = false;
@@ -77,8 +86,8 @@ export class ClientListComponent {
           console.log("Errors: ", this.errors);
         }
       );
-    }
-  });
+    
+  };
 }
 
 }

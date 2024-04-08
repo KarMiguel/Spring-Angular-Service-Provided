@@ -44,28 +44,32 @@ export class LoginComponent {
   cancelRegistration(){
     this.signing_up = false
   }
-
-  register(){
-    const user:User = new User();
+  register() {
+    const user: User = new User();
     user.name = this.name;
     user.username = this.username;
     user.password = this.password;
+    if (this.password.length < 8) {
+      this.errors = ['Senha deve conter no mínimo 8 caracteres.'];
+    } else {
       this.authService
         .registerUser(user)
-        .subscribe(response =>{
-          this.menssageSuccess = "Cadastro realizado com Sucesso! Efetue Login!";
-          this.signing_up= false;
-          this.username='';
-          this.password='';
-          this.name ='';
-          this.errors= []
-        }, errorResponse =>{
-          this.menssageSuccess = null;
-          this.errors = errorResponse.error.errors;
-        });
-        
+        .subscribe(
+          response => {
+            this.menssageSuccess = "Cadastro realizado com sucesso! Efetue o login!";
+            this.signing_up = false;
+            this.username = '';
+            this.password = '';
+            this.name = '';
+            this.errors = [];
+          },
+          errorResponse => {
+            this.menssageSuccess = null;
+            this.errors = errorResponse.error.errors;
+          }
+        );
+    }
   }
-
   }
 
 

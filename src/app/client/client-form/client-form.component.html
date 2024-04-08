@@ -1,7 +1,7 @@
 <div class="container">
 <h1 class="mt-4">Formulário Cliente</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active ">{{client.id ? 'Edição' : 'Cadastro'}}</li>
+    <li class="breadcrumb-item active ">Cadastro</li>
 </ol>
 
 
@@ -13,7 +13,7 @@
                     <div class="alert alert-success"
                          role="alert" 
                          *ngIf="this.success == true">
-                        Cliente salvo/atualizado com Sucesso!
+                        Cliente salvo com Sucesso!
                     </div>
 
                     <div class="alert alert-danger"
@@ -23,20 +23,7 @@
                         </div>
                 </div>
             </div>
-            <div class="col-md-6" *ngIf="client.id">
-                <div class="form-group">
-                    <label for="id">ID:</label>
-                    <input type="text" id="id" class="form-control" disabled [ngModel]="client.id" name="id">      
-                </div>
-            </div>
-
-            <div class="col-md-6" *ngIf="client.dateRegister">
-                <div class="form-group">
-                    <label for="dateRegister">Data Cadastro:</label>
-                    <input type="text" id="dateRegister" class="form-control" name="dateRegister" disabled [ngModel]="client.dateRegister">      
-                </div>
-            </div>
-
+            
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">Nome: *</label>
@@ -46,8 +33,21 @@
 
             <div class="col-md-6">
                 <div class="form-group">
+                    <label for="name">Telefone: *</label>
+                    <input type="text" id="phone" placeholder="somente números" maxlength="11" required class="form-control" name="phone" [(ngModel)]="client.phone">      
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Email do Cliente: *</label>
+                    <input type="email" id="phone" required class="form-control" name="email" [(ngModel)]="client.emailClient">      
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
                     <label for="cpf">CPF: *</label>
-                    <input type="text"  maxlength="11" id="cpf" required class="form-control" name="cpf" [(ngModel)]="client.cpf">
+                    <input type="text"  maxlength="11" id="cpf" placeholder="somente números" required class="form-control" name="cpf" [(ngModel)]="client.cpf">
                 </div>
             </div> 
 
@@ -58,10 +58,7 @@
                         Salvar
                     </button>
 
-                    <button type="submit" class="btn btn-primary" *ngIf="client.id" >
-                        <i class="fa fa-sync-alt"></i>
-                        Atualizar
-                    </button>
+             
 
                     <button type="reset" class="ml-3 btn btn-danger" routerLink="/client">
                         <i class="fa fa-arrow-alt-circle-left"></i>

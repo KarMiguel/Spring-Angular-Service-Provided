@@ -41,6 +41,20 @@
         *ngIf="message">
         {{message}}   
     </div>
+    <div class="col-md-12 mt-5">
+        <div class="alert alert-success"
+             role="alert" 
+             *ngIf="messageSuccess">
+                {{messageSuccess}}   
+            </div>
+
+        <div class="alert alert-danger"
+             role="alert" 
+             *ngIf="messageError">
+                {{messageError}}
+            </div>
+    </div>
+   
 </div>
 <div class="col-md-12 ">
     <table class=" mt-2  table ">
@@ -49,18 +63,38 @@
                 <th class="text-center">Cliente</th>
                 <th class="text-center">Descrição</th>
                 <th class="text-center">Valor</th>
-                <th class="text-center">Data </th>
+                <th class="text-center">Data</th>
+                <th class="text-center">Ações</th>
             </tr>              
         </thead>
         <tbody>
             <tr *ngFor="let servico of list">
                 <td class="text-center">{{servico.client.name}}</td>
                 <td class="text-center">{{servico.description}}</td>
-                <td class="text-center">{{servico.value}}</td>
+                <td class="text-center">{{formatarPrice(servico.value.toString())}}</td>
                 <td class="text-center">{{servico.date}}</td>
-                   
+                <td class="text-center">
+                        <button class="btn btn-danger" (click)="preparesDelete(servico)">
+                            <i class="fa fa-trash text-white"></i>
+                        </button>
+                </td>                   
             </tr>
         </tbody>
     </table>
-    
+    <div id="modalDelet" class="modal fade" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="serviceProvided">
+        <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4>Confirmação</h4>
+                  </div>
+                  <div class="modal-body">
+                      Realmente deseja excluir o serviço '{{serviceProvided.description}}' do cliente {{serviceProvided.client.name}}?
+                  </div>
+                  <div class="modal-footer">
+                      <button class="btn btn-success" (click)="deleteService()" data-bs-dismiss="modal">Confirmar</button>
+                      <button class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                  </div>
+              </div>
+          </div>
+      </div>    
 </div>

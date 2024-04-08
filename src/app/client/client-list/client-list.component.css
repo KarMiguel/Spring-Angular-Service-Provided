@@ -1,11 +1,6 @@
-.btn{
-    padding: 5px 15px;
-}
 
-.btn-primary{
-    background-color: #007bff;
-}
 
-.btn-danger{
-    background-color: #dc3545;
+.table {
+    overflow: hidden;
+    
 }
