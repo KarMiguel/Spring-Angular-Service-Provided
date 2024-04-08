@@ -22,11 +22,13 @@ public interface ServiceProvidedRepository extends JpaRepository<ServiceProvided
 
     @Query("select s from ServiceProvided s join s.client c " +
             "join c.users u " +
-            "where upper(trim(c.name)) like upper(trim(concat('%', :name, '%'))) and " +
-            "MONTH(s.date) = :mes and " +
+            "where (:name is null or upper(trim(c.name)) like upper(trim(concat('%', :name, '%')))) and " +
+            "(:mes is null or MONTH(s.date) = :mes) and " +
             "u.username = :username")
     List<ServiceProvided> findByNameAndMesAndClient(
             @Param("name") String name,
             @Param("mes") Integer mes,
             @Param("username") String username);
+    void deleteByClient(Client client);
+
 }

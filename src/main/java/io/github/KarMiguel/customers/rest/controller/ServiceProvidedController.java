@@ -59,14 +59,11 @@ public class ServiceProvidedController {
 
     @GetMapping("/list")
     public ResponseEntity<List<ServiceProvided>> list(Authentication authentication) {
-        // Obtém o nome de usuário do usuário logado
         String username = authentication.getName();
 
-        // Busca o cliente associado ao usuário logado
         Client client = clientRepository.findByUsersUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
 
-        // Obtém os serviços prestados pelo cliente associado ao usuário logado
         List<ServiceProvided> service = serviceProvidedReposity.findByClient(client);
 
         return ResponseEntity.ok(service);
@@ -88,6 +85,13 @@ public class ServiceProvidedController {
 
         return ResponseEntity.ok(service);
 
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@PathVariable Integer id) {
+        ServiceProvided service = serviceProvidedReposity.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Serviço Prestado não encontrado."));
+        serviceProvidedReposity.delete(service);
+        return ResponseEntity.noContent().build() ;
     }
 
 }

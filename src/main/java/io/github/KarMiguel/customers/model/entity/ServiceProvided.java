@@ -12,6 +12,9 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceProvided {
 
     @Id
@@ -24,7 +27,6 @@ public class ServiceProvided {
     @ManyToOne
     @JoinColumn(name = "id_client")
     private Client client;
-
 
     @Column
     private BigDecimal value;

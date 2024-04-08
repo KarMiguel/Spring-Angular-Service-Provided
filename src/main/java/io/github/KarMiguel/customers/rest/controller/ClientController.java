@@ -4,6 +4,7 @@ import io.github.KarMiguel.customers.model.entity.Client;
 import io.github.KarMiguel.customers.model.entity.Users;
 import io.github.KarMiguel.customers.model.repository.ClientRepository;
 import io.github.KarMiguel.customers.model.repository.UserRepository;
+import io.github.KarMiguel.customers.service.ClientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class ClientController {
     private final ClientRepository repository;
 
     private final UserRepository userRepository;
-
+    private final ClientService clientService;
 
     @PostMapping
     public ResponseEntity<Client> save(@RequestBody @Valid Client client, Authentication authentication) {
@@ -44,13 +45,8 @@ public class ClientController {
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> deleteById(@PathVariable Integer id) {
-        repository.findById(id)
-                .map(client -> {
-                    repository.delete(client);
-                    return ResponseEntity.noContent().build();
-                })
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
-        return null;
+        clientService.deleteClient(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
