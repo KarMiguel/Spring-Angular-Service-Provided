@@ -24,7 +24,13 @@ public class ClientController {
     private final ClientRepository repository;
 
     private final UserRepository userRepository;
+
     private final ClientService clientService;
+
+    @GetMapping
+    public  String hello(){
+        return "Seja bem vindo!";
+    }
 
     @PostMapping
     public ResponseEntity<Client> save(@RequestBody @Valid Client client, Authentication authentication) {

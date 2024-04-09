@@ -11,6 +11,7 @@ import io.github.KarMiguel.customers.rest.exception.UserRegisterException;
 import io.github.KarMiguel.customers.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -49,7 +50,7 @@ public class AuthenticationController {
         try {
             userService.registerUser(newUser);
             return ResponseEntity.ok().build();
-        } catch (UserRegisterException e) {
+        }catch (UserRegisterException e) {
             throw  new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
