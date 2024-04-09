@@ -27,7 +27,7 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    @GetMapping
+    @GetMapping("/hello")
     public  String hello(){
         return "Seja bem vindo!";
     }
@@ -69,13 +69,10 @@ public class ClientController {
 
     @GetMapping
     public ResponseEntity<List<Client>> listAll(Authentication authentication) {
-        // Obtém o nome de usuário do usuário logado
         String username = authentication.getName();
 
-        // Busca o usuário pelo nome de usuário
         Users user = (Users ) userRepository.findByUsername(username);
 
-        // Obtém a lista de clientes associados ao usuário logado
         List<Client> clients = repository.findClientByUsers(user);
 
         return ResponseEntity.ok(clients);
