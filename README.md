@@ -14,7 +14,7 @@ https://github.com/KarMiguel/Spring-Angular-Service-Provided.git
 
 3. Instale [PostgreSQL](https://www.postgresql.org/)
 
-## Uso
+## Acesse primeira api
 
 1. Inicie o aplicativo com Maven
 2. A API estará acessível em http://localhost:8090
