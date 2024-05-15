@@ -26,7 +26,7 @@ export class ServicePrestadoService {
   search(name: string, month: number): Observable<ServiceProvidedSearch[]> {
     const httpParams = new HttpParams()  
         .set("name", name? name : '')
-        .set("month", month? month.toString() : '');
+        .set("month", month? month.toString() : ''); 
 
 
     return this.http.get<any>(`${this.apiUrl}/api/service-provided`, { params: httpParams });
