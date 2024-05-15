@@ -47,7 +47,7 @@ export class ServicProvideListComponent  {
     const numericPrice = parseFloat(price);
   
     const formattedPrice = numericPrice.toLocaleString('pt-BR', {
-      style: 'currency',
+      style: 'currency', 
       currency: 'BRL'
     });
   
